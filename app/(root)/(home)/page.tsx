@@ -1,25 +1,29 @@
-import React from 'react'
+import MeetingTypeList from "@/components/MeetingTypeList";
 
 const Home = () => {
-  return (
-    <div className="bg-cover bg-center rounded-lg min-h-screen" style={{ backgroundImage: 'url(/images/hero-background.png)' }}>
-      <div className="bg-black bg-opacity-50 min-h-screen flex justify-center items-center">
-        <div className="bg-white rounded-lg p-8 max-w-md">
-          <header className="text-white py-4">
-            <div className="container mx-auto px-4">
-              <h1 className="text-3xl font-bold">Code Buddy</h1>
-              <p className="text-sm">Find your perfect coding partner</p>
-            </div>
-          </header>
-          <section className="container mx-auto px-4 py-8">
-            <h2 className="text-2xl font-bold mb-4">Connect with a coding buddy</h2>
-            <p className="text-lg text-black">"Coding as a pair is like solving a mystery together. Debugging isn't just about fixing errors; it's about uncovering the story behind the code."</p>
+  const now = new Date();
 
-          </section>
+  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Nairobi' });
+  const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeZone: 'Africa/Nairobi' })).format(now);
+
+
+  return (
+    <section className="flex size-full flex-col gap-5 text-white">
+      <div className="h-[303px] w-full rounded-[20px] bg-cover" style={{ backgroundImage: 'url(/images/hero-background.png)' }}>
+        <div className="flex h-full flex-col justify-between max-md:px-5 max-md:py-8 lg:p-11">
+          <h2 className="glassmorphism max-w-[273px] rounded py-2 text-center text-base font-normal">
+            Upcoming Meeting at: 12:30 PM
+          </h2>
+          <div className="flex flex-col gap-2">
+            <h1 className="text-4xl font-extrabold lg:text-7xl">{time}</h1>
+            <p className="text-lg font-medium text-sky-1 lg:text-2xl">{date}</p>
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
 
-export default Home
+      <MeetingTypeList />
+    </section>
+  );
+};
+
+export default Home;

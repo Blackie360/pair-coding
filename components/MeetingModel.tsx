@@ -30,7 +30,7 @@ const MeetingModel = ({ isOpen, onClose, title, className,
 }: MeetingModelProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-    <DialogTrigger>Open</DialogTrigger>
+    
     <DialogContent className="flex w-full max-w-[520px] flex-col gap-6 border-none bg-slate-50 text-black
     px-6 py-9">
       <div className="flex flex-col gap-6">

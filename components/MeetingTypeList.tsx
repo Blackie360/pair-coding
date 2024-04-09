@@ -109,13 +109,12 @@ const MeetingTypeList = () => {
         />
 
       <MeetingModel 
-      isOpen={meetingState === 'isInstantMeeting'}
-      onClose={() => setMeetingState(undefined)}
-      title="Instant Meeting"
-      className='text-center'
-      buttonText='Start Meeting'
-      handleClick={createmeeting}
-
+        isOpen={meetingState === 'isInstantMeeting'}
+        onClose={() => setMeetingState(undefined)}
+        title="Instant Meeting"
+        className='text-center'
+        buttonText='Start Meeting'
+        handleClick={createmeeting} children={undefined}
       />
 
     </section>

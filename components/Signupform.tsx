@@ -15,11 +15,16 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { SignUpSchema } from "@/app/types"
+import { signUp } from "@/app/actions/auth.actions"
+import { toast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation"
 
 
 
 
 const Signupform = () => {
+const router = useRouter()
+
     // 1. Define your form.
 const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -27,20 +32,34 @@ const form = useForm<z.infer<typeof SignUpSchema>>({
     username: "",
     },
 })
- 
+
   // 2. Define a submit handler.
-function onSubmit(values: z.infer<typeof SignUpSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
-  }
-  return (
+async function onSubmit(values: z.infer<typeof SignUpSchema>) {
+const res = await signUp(values)
+if(res.error){
+    toast({
+
+        variant: "destructive",
+        description: res.error,
+})
+} else if (res.success){
+    toast({
+        title: "Success",
+        description: "Your account has been created successfully.",
+        variant: "success",
+    });
+    router.push('/') 
+}
+
+
+}
+return (
     <div className="min-w-500">
     <Form {...form}>
                     <form className="flex flex-col gap-2" onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
                             control={form.control}
-                            name="name"
+                            name="username"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>

@@ -15,15 +15,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-const formSchema = z.object({
-    name: z.string().min(3),
-    email: z.string().email(),
-    password: z.string().min(6),
-    confirmPassword: z.string().min(6),
-}).refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"], // This will highlight the confirmPassword field
-})
+
 
 
 const Signupform = () => {
@@ -42,6 +34,7 @@ function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
   }
   return (
+    <div className="min-w-500">
     <Form {...form}>
                     <form className="flex flex-col gap-2" onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
@@ -117,6 +110,7 @@ function onSubmit(values: z.infer<typeof formSchema>) {
                         <Button type="submit">Sign Up</Button>
                     </form>
                 </Form>
+                </div>
 )
 }
 

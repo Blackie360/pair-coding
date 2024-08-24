@@ -14,21 +14,22 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { SignUpSchema } from "@/app/types"
 
 
 
 
 const Signupform = () => {
     // 1. Define your form.
-const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+const form = useForm<z.infer<typeof SignUpSchema>>({
+    resolver: zodResolver(SignUpSchema),
     defaultValues: {
     username: "",
     },
 })
  
   // 2. Define a submit handler.
-function onSubmit(values: z.infer<typeof formSchema>) {
+function onSubmit(values: z.infer<typeof SignUpSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)

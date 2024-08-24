@@ -2,15 +2,15 @@ import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import db from ".";
 
-const userTable = pgTable("user", {
+export const userTable = pgTable("user", {
 	id: text("id").primaryKey(),
     username: text("username").notNull().unique(),
     hashedPassword: text("hashed_password"),
     googleId: text("google_id").unique(),
-    
+
 });
 
-const sessionTable = pgTable("session", {
+export const sessionTable = pgTable("session", {
 	id: text("id").primaryKey(),
 	userId: text("user_id")
 		.notNull()

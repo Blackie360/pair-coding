@@ -6,7 +6,7 @@ import * as Argon2 from "argon2"
 import { generateId } from "lucia"
 import db from "../lib/db"
 import { userTable } from "../lib/db/schema"
-import { lucia } from "../lib/auth"
+import { lucia, validateRequest } from "../lib/auth"
 import { cookies } from "next/headers"
 import { eq } from "drizzle-orm"
 
@@ -104,3 +104,23 @@ export const signIn = async (values: z.infer<typeof LoginSchema>) => {
       success: "Logged in successfully",
     }
   }
+
+export const signOut = async () => {
+    try {
+        const { session } = await validateRequest()
+
+    if (!session) {
+        return {
+            success: "Unauthorized",
+        }
+    }
+    await lucia.invalidateSession(session.id)
+    const sessionCookie = lucia.createBlankSessionCookie()
+    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
+    } catch (error: any) {
+        return {
+            error: error.message
+        
+    }
+}
+}
